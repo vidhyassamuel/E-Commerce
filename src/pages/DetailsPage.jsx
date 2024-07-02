@@ -3,11 +3,12 @@ import { PRODUCT_API } from "../constant/apiConstant";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "../css/DetailsPage.css"
+import useCartStore from "../zustand/store";
 
 const DetailsPage = () => {
   const [product, setProduct] = useState([]);
   const { id } = useParams();
- 
+  const addItem = useCartStore((state) => state.addItem)
   useEffect(() => {
     fetchSingleData(id);
   }, [id]);
@@ -21,6 +22,10 @@ const DetailsPage = () => {
     }
   };
 
+  const handleAddToCart = ()=>{
+    addItem(product);
+  }
+
   return (
     <div className="details-container">
       <h2>Product Details</h2>
@@ -30,6 +35,7 @@ const DetailsPage = () => {
           <h3> {product.title} </h3>
           <p> {product.description} </p>
           <p> {product.price} </p>
+          <button  onClick={handleAddToCart} > Add to cart </button>
         </div>
       ) : (
         <h1>Loading product details...</h1>
