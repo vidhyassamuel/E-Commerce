@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import   { useEffect, useState } from "react";
 import { PRODUCT_API } from "../constant/apiConstant";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import "../css/DetailsPage.css"
 
 const DetailsPage = () => {
   const [product, setProduct] = useState([]);
   const { id } = useParams();
  
-
   useEffect(() => {
     fetchSingleData(id);
-  }, []);
+  }, [id]);
 
   const fetchSingleData = async (id) => {
     try {
